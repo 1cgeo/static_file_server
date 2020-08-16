@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { auth } from "../services";
 
-export default ({ component: Component, exact, path, ...rest }) => (
+export default ({ component: Component, exact, path, role, ...rest }) => (
   <Route
     {...rest}
     exact={exact}
@@ -17,8 +17,17 @@ export default ({ component: Component, exact, path, ...rest }) => (
         );
       }
 
+      const userRole = auth.getAuthorization();
+      // check if route is restricted by role
+      if (role && role !== userRole) {
+        // role not authorised so redirect to home page
+        return (
+          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+        );
+      }
+
       // authorised so return component
-      return <Component {...props} />;
+      return <Component role={userRole} {...props} />;
     }}
   />
 );

@@ -1,4 +1,5 @@
 "use strict";
+const { databaseVersion } = require("../database");
 
 const app = require("./app");
 
@@ -33,6 +34,8 @@ const httpsConfig = () => {
       success: true,
       information: {
         service_name: SERVICE_NAME,
+        version: VERSION,
+        database_version: databaseVersion.nome,
         port: PORT,
       },
     });
@@ -45,6 +48,8 @@ const httpConfig = () => {
       success: true,
       information: {
         service_name: SERVICE_NAME,
+        version: VERSION,
+        database_version: databaseVersion.nome,
         port: PORT,
       },
     });

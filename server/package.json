@@ -16,6 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
@@ -32,6 +33,7 @@
     "minimist": "^1.2.5",
     "nocache": "^2.1.0",
     "nodemon": "^2.0.4",
+    "pg-promise": "^10.5.8",
     "pm2": "^4.4.0",
     "serialize-error": "^7.0.1",
     "swagger-jsdoc": "^4.0.0",

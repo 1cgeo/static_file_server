@@ -110,3 +110,6 @@ test_request.http
 
 *.fmw
 *.ffs
+
+public
+.env

@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, HashRouter } from "react-router-dom";
+import { withRouter, HashRouter, NavLink } from "react-router-dom";
 import clsx from "clsx";
 import AppBar from "@material-ui/core/AppBar";
 import Container from "@material-ui/core/Container";
@@ -11,6 +11,7 @@ import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 
 import styles from "./styles";
 import { handleLogout } from "./api.js";
+import { PrivateRoute } from '../helpers'
 
 import GerenciarUsuarios from "../GerenciarUsuarios";
 import StaticComponent from "../StaticComponent";
@@ -21,10 +22,6 @@ export default withRouter((props) => {
   const clickLogout = () => {
     handleLogout();
     props.history.push("/login");
-  };
-
-  const clickGerenciarUsuarios = () => {
-    props.history.push("/gerenciar_usuarios");
   };
 
   return (
@@ -42,7 +39,7 @@ export default withRouter((props) => {
               {process.env.REACT_APP_SERVICE_NAME}
             </Typography>
             {props.role === "ADMIN" && (
-              <IconButton color="inherit" onClick={clickGerenciarUsuarios}>
+              <IconButton color="inherit" component={NavLink} replace exact to='/gerenciar_usuarios'>
                 <Typography
                   variant="body1"
                   color="inherit"

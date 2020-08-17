@@ -5,9 +5,7 @@
   "scripts": {
     "create-docs": "node create_documentation.js",
     "dev": "nodemon src/index.js",
-    "dev-https": "nodemon src/index.js --https",
-    "production": "pm2 start src/index.js --name static-file-server",
-    "production-https": "pm2 start src/index.js --name static-file-server-https -- --https "
+    "dev-https": "nodemon src/index.js --https"
   },
   "nodemonConfig": {
     "ignore": [
@@ -36,6 +34,7 @@
     "pg-promise": "^10.5.8",
     "pm2": "^4.4.0",
     "serialize-error": "^7.0.1",
+    "semver": "^7.3.2",
     "swagger-jsdoc": "^4.0.0",
     "swagger-ui-express": "^4.1.4",
     "winston": "^3.3.3",

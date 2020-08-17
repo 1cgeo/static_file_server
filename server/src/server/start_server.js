@@ -5,7 +5,7 @@ const app = require("./app");
 
 const { logger, AppError } = require("../utils");
 
-const { SERVICE_NAME, PORT } = require("../config");
+const { SERVICE_NAME, PORT, VERSION } = require("../config");
 
 const httpsConfig = () => {
   const fs = require("fs");

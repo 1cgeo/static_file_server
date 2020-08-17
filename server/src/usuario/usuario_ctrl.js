@@ -42,31 +42,7 @@ controller.deletaUsuario = async uuid => {
     if (adm) {
       throw new AppError('Usuário com privilégio de administrador não pode ser deletado', httpCode.BadRequest)
     }
-
-    await t.none(
-      `UPDATE fme.versao_rotina
-      SET usuario_id = NULL
-      WHERE usuario_id IN
-      (SELECT id FROM dgeo.usuario WHERE uuid = $<uuid>)`,
-      { uuid }
-    )
-
-    await t.none(
-      `UPDATE fme.tarefa_agendada_data
-      SET usuario_id = NULL
-      WHERE usuario_id IN
-      (SELECT id FROM dgeo.usuario WHERE uuid = $<uuid>)`,
-      { uuid }
-    )
-
-    await t.none(
-      `UPDATE fme.tarefa_agendada_cron
-      SET usuario_id = NULL
-      WHERE usuario_id IN
-      (SELECT id FROM dgeo.usuario WHERE uuid = $<uuid>)`,
-      { uuid }
-    )
-
+    
     const result = await t.result(
       'DELETE FROM dgeo.usuario WHERE uuid = $<uuid>',
       { uuid }

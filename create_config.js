@@ -303,7 +303,7 @@ const createConfig = async () => {
       {
         type: "confirm",
         name: "dbCreate",
-        message: "Deseja criar o banco de dados do Gerenciador do FME?",
+        message: "Deseja criar o banco de dados do serviço?",
         default: true,
       },
       {
@@ -316,14 +316,14 @@ const createConfig = async () => {
         type: "input",
         name: "authUser",
         message:
-          "Qual o nome do usuário já existente Serviço de Autenticação que será administrador do Gerenciador do FME?",
+          "Qual o nome do usuário já existente Serviço de Autenticação que será administrador do serviço?",
       },
       {
         type: "password",
         name: "authPassword",
         mask: "*",
         message:
-          "Qual a senha do usuário já existente Serviço de Autenticação que será administrador do Gerenciador do FME?",
+          "Qual a senha do usuário já existente Serviço de Autenticação que será administrador do serviço?",
       },
     ];
 
@@ -370,7 +370,7 @@ const createConfig = async () => {
       );
 
       console.log(
-        "Banco de dados do Gerenciador do FME criado com sucesso!".blue
+        "Banco de dados criado com sucesso!".blue
       );
     } else {
       await givePermission({ dbUser, dbPassword, dbPort, dbServer, dbName });

@@ -13,7 +13,7 @@ const dbVersion = {}
 const validate = dbv => {
   if (semver.lt(semver.coerce(dbv), semver.coerce(MIN_DATABASE_VERSION))) {
     throw new AppError(
-      `Versão do banco de dados (${dbv}) não compatível com a versão do Gerenciador do FME. A versão deve ser superior a ${MIN_DATABASE_VERSION}.`
+      `Versão do banco de dados (${dbv}) não compatível com a versão do serviço. A versão deve ser superior a ${MIN_DATABASE_VERSION}.`
     )
   }
 }
@@ -27,7 +27,7 @@ dbVersion.load = async () => {
 
     if (!dbv) {
       throw new AppError(
-        'O banco de dados não não é compatível com a versão do Gerenciador do FME.'
+        'O banco de dados não não é compatível com a versão do serviço.'
       )
     }
     validate(dbv.nome)

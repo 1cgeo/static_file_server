@@ -1,6 +1,7 @@
 "use strict";
 
 const express = require("express");
+const session = require("express-session");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -13,6 +14,8 @@ const noCache = require("nocache");
 
 const swaggerOptions = require("./swagger_options");
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+const { JWT_SECRET } = require("../config");
 
 const {
   AppError,
@@ -47,6 +50,9 @@ const limiter = rateLimit({
 // apply limit all requests
 app.use(limiter);
 
+const argv = require("minimist")(process.argv.slice(2));
+const secure = "https" in argv && argv.https;
+
 app.use((req, res, next) => {
   const url = req.protocol + "://" + req.get("host") + req.originalUrl;
 
@@ -57,6 +63,20 @@ app.use((req, res, next) => {
   return next();
 });
 
+app.use(
+  session({
+    name: "sid",
+    saveUninitialized: false,
+    resave: false,
+    secret: JWT_SECRET,
+    cookie: {
+      maxAge: 1000 * 60 * 30,
+      sameSite: true,
+      secure: secure,
+    },
+  })
+);
+
 // All routes used by the App
 app.use("/api", appRoutes);
 
@@ -66,12 +86,28 @@ app.use("/api/api_docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Serve JSDocs
 app.use("/api/js_docs", express.static(path.join(__dirname, "..", "js_docs")));
 
-// Serve Files
+const redirectLogin = (req, res, next) => {
+  if (!req.session.userId) {
+    return res.redirect("/");
+  } else {
+    next();
+  }
+};
+// Serve React Files
 app.use(express.static(path.join(__dirname, "..", "build")));
 
-app.get("/*", (req, res) => {
+app.get("/static_files", redirectLogin, (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "static_files", "index.html"));
+});
+
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "build", "index.html"));
 });
+
+app.use(
+  redirectLogin,
+  express.static(path.join(__dirname, "..", "static_files"))
+);
 
 app.use((req, res, next) => {
   const err = new AppError(

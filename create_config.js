@@ -369,9 +369,7 @@ const createConfig = async () => {
         authUserData
       );
 
-      console.log(
-        "Banco de dados criado com sucesso!".blue
-      );
+      console.log("Banco de dados criado com sucesso!".blue);
     } else {
       await givePermission({ dbUser, dbPassword, dbPort, dbServer, dbName });
 

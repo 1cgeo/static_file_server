@@ -113,3 +113,5 @@ test_request.http
 
 public
 .env
+
+static_files

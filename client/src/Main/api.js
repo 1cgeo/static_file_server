@@ -1,7 +1,8 @@
-import { auth } from '../services'
+import { api, auth } from "../services";
 
 const handleLogout = async () => {
-  auth.logout()
-}
+  auth.logout();
+  return api.post("/api/login/end_session");
+};
 
-export { handleLogout }
+export { handleLogout };

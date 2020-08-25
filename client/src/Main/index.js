@@ -8,13 +8,14 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+import DescriptionIcon from "@material-ui/icons/Description";
 
 import styles from "./styles";
 import { handleLogout } from "./api.js";
-import { PrivateRoute } from '../helpers'
+import { PrivateRoute } from "../helpers";
 
 import GerenciarUsuarios from "../GerenciarUsuarios";
-import StaticComponent from "../StaticComponent";
+import StaticFiles from "../StaticFiles";
 
 export default withRouter((props) => {
   const classes = styles();
@@ -39,17 +40,42 @@ export default withRouter((props) => {
               {process.env.REACT_APP_SERVICE_NAME}
             </Typography>
             {props.role === "ADMIN" && (
-              <IconButton color="inherit" component={NavLink} replace exact to='/gerenciar_usuarios'>
-                <Typography
-                  variant="body1"
+              <>
+                <IconButton
                   color="inherit"
-                  noWrap
-                  className={classes.title}
+                  component={NavLink}
+                  replace
+                  exact
+                  to="/"
                 >
-                  Gerenciar Usuários
-                </Typography>
-                <VerifiedUserIcon className={classes.logoutButton} />
-              </IconButton>
+                  <Typography
+                    variant="body1"
+                    color="inherit"
+                    noWrap
+                    className={classes.title}
+                  >
+                    Acessar Arquivos
+                  </Typography>
+                  <DescriptionIcon className={classes.logoutButton} />
+                </IconButton>
+                <IconButton
+                  color="inherit"
+                  component={NavLink}
+                  replace
+                  exact
+                  to="/gerenciar_usuarios"
+                >
+                  <Typography
+                    variant="body1"
+                    color="inherit"
+                    noWrap
+                    className={classes.title}
+                  >
+                    Gerenciar Usuários
+                  </Typography>
+                  <VerifiedUserIcon className={classes.logoutButton} />
+                </IconButton>
+              </>
             )}
             <IconButton color="inherit" onClick={clickLogout}>
               <Typography
@@ -67,7 +93,7 @@ export default withRouter((props) => {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Container maxWidth="xl" className={classes.container}>
-            <PrivateRoute exact path="/" component={StaticComponent} />
+            <PrivateRoute exact path="/" component={StaticFiles} />
             <PrivateRoute
               role="ADMIN"
               exact

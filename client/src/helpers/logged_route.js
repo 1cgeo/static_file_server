@@ -48,19 +48,9 @@ export default ({ component: Component, exact, path, role, ...rest }) => {
       path={path}
       render={(props) => {
         if (isAuthenticated) {
-          const userRole = auth.getAuthorization();
-          // check if route is restricted by role
-          if (role && role !== userRole) {
-            // role not authorised so redirect to home page
-            return (
-              <Redirect
-                to={{ pathname: "/", state: { from: props.location } }}
-              />
-            );
-          }
-
-          // authorised so return component
-          return <Component role={userRole} {...props} />;
+          return (
+            <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+          );
         }
         if (loading) {
           return (
@@ -75,11 +65,7 @@ export default ({ component: Component, exact, path, role, ...rest }) => {
           );
         }
 
-        return (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        );
+        return <Component {...props} />;
       }}
     />
   );

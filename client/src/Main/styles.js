@@ -81,10 +81,12 @@ const styles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(4),
   },
   paper: {
-    padding: theme.spacing(2),
+    marginTop: theme.spacing(8),
     display: "flex",
-    overflow: "auto",
     flexDirection: "column",
+    alignItems: "center",
+    padding: theme.spacing(3, 2),
+    elevation: 3,
   },
   fixedHeight: {
     height: 240,

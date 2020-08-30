@@ -26,6 +26,7 @@ const verifyAdmin = asyncHandler(async (req, res, next) => {
     );
   }
   req.usuarioUuid = decoded.uuid;
+  req.administrador = true;
 
   next();
 });

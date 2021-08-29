@@ -22,7 +22,7 @@ export default withRouter((props) => {
 
   const clickLogout = () => {
     handleLogout();
-    props.history.push("/login");
+    props.history.push("/client/login");
   };
 
   return (

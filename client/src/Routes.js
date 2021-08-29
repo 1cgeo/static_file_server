@@ -12,10 +12,10 @@ import Main from "./Main";
 const Routes = () => (
   <Router history={history}>
     <Switch>
-      <PrivateRoute exact path="/" component={Main} />
-      <LoggedRoute exact path="/login" component={Login} />
-      <Route exact path="/erro" component={Erro} />
-      <Route path="*" component={NaoEncontrado} />
+      <PrivateRoute exact path="/client" component={Main} />
+      <LoggedRoute exact path="/client/login" component={Login} />
+      <Route exact path="/client/erro" component={Erro} />
+      <Route path="/client/*" component={NaoEncontrado} />
     </Switch>
   </Router>
 );

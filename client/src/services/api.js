@@ -19,11 +19,11 @@ axiosInstance.interceptors.request.use(async (config) => {
 const errorHandler = (error) => {
   if (error.response && [401, 403].indexOf(error.response.status) !== -1) {
     auth.logout();
-    history.push("/");
+    history.push("/client");
     throw new axios.Cancel("Operation canceled by redirect due 401/403.");
   }
   if (error.response && [500].indexOf(error.response.status) !== -1) {
-    history.push("/erro");
+    history.push("/client/erro");
     throw new axios.Cancel("Operation canceled by redirect due 500.");
   }
   return Promise.reject(error);

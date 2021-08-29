@@ -9,7 +9,6 @@ const path = require("path");
 const axios = require("axios");
 const crypto = require("crypto");
 
-const pgtools = require("pgtools");
 const promise = require("bluebird");
 const pgp = require("pg-promise")({
   promiseLib: promise,
@@ -120,7 +119,8 @@ const createDotEnv = (
 ) => {
   const secret = crypto.randomBytes(64).toString("hex");
 
-  const env = `PORT=${port}
+  const env = `NODE_TLS_REJECT_UNAUTHORIZED=0
+PORT=${port}
 DB_SERVER=${dbServer}
 DB_PORT=${dbPort}
 DB_NAME=${dbName}
@@ -187,7 +187,12 @@ const createDatabase = async (
     host: dbServer,
   };
 
-  await pgtools.createdb(config, dbName);
+  console.log('Criando Banco...')
+  const postgresConnectionString = `postgres://${dbUser}:${dbPassword}@${dbServer}:${dbPort}/postgres`
+  const postgresConn = pgp(postgresConnectionString);
+  await postgresConn.none('CREATE DATABASE $1:name', [dbName]);
+
+  console.log('Executando SQLs...')
 
   const connectionString = `postgres://${dbUser}:${dbPassword}@${dbServer}:${dbPort}/${dbName}`;
 
@@ -268,8 +273,7 @@ const createConfig = async () => {
         type: "input",
         name: "dbUser",
         message:
-          "Qual o nome do usuário do PostgreSQL para interação com o serviço (já existente no banco de dados e ser superusuario)?",
-        default: "controle_app",
+          "Qual o nome do usuário do PostgreSQL para interação com o serviço (já existente no banco de dados e ser superusuario)?"
       },
       {
         type: "password",
@@ -292,7 +296,7 @@ const createConfig = async () => {
       {
         type: "input",
         name: "serviceNameAbrev",
-        message: "Informe uma versão abreviada do nome (sem espaços)",
+        message: "Informe uma versão abreviada do nome (deve estar cadastrado no serviço de autenticação)",
       },
       {
         type: "input",

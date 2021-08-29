@@ -29,7 +29,7 @@ const NaoEncontrado = props => {
         </Typography>
       </div>
       <div>
-        <LinkMui to='/' variant='h6' component={Link}>
+        <LinkMui to='/client' variant='h6' component={Link}>
           Retorne a página principal
         </LinkMui>
       </div>

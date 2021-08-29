@@ -16,7 +16,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default ({ component: Component, exact, path, role, ...rest }) => {
+const LoggedRoute = ({ component: Component, exact, path, role, ...rest }) => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -49,7 +49,7 @@ export default ({ component: Component, exact, path, role, ...rest }) => {
       render={(props) => {
         if (isAuthenticated) {
           return (
-            <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+            <Redirect to={{ pathname: "/client", state: { from: props.location } }} />
           );
         }
         if (loading) {
@@ -70,3 +70,5 @@ export default ({ component: Component, exact, path, role, ...rest }) => {
     />
   );
 };
+
+export default LoggedRoute

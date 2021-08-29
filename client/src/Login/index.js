@@ -23,7 +23,7 @@ export default withRouter((props) => {
   const handleForm = async (values) => {
     try {
       const success = await handleLogin(values.usuario, values.senha);
-      if (success) props.history.push("/");
+      if (success) props.history.push("/client");
     } catch (err) {
       handleApiError(err, setSnackbar);
     }

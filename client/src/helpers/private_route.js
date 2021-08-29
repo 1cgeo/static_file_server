@@ -16,7 +16,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-export default ({ component: Component, exact, path, role, ...rest }) => {
+const PrivateRoute = ({ component: Component, exact, path, role, ...rest }) => {
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -54,7 +54,7 @@ export default ({ component: Component, exact, path, role, ...rest }) => {
             // role not authorised so redirect to home page
             return (
               <Redirect
-                to={{ pathname: "/", state: { from: props.location } }}
+                to={{ pathname: "/client", state: { from: props.location } }}
               />
             );
           }
@@ -77,10 +77,12 @@ export default ({ component: Component, exact, path, role, ...rest }) => {
 
         return (
           <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
+            to={{ pathname: "/client/login", state: { from: props.location } }}
           />
         );
       }}
     />
   );
 };
+
+export default PrivateRoute

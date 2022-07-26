@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        link(href="/css/bootstrap.min.css" rel="stylesheet")
+        link(href="/css/main.css" rel="stylesheet")
+        title Login
+    body(class="text-center")
+        main(class="form-signin")
+            form(method="POST" action="/signin")
+                h1(class="h3 mb-3 fw-normal")
+                div(class="form-floating")
+                    input(class="form-control" id="username" type="text" name="username" placeholder="Usuário")
+                    label(for="username") Usuário
+
+                div(class="form-floating")
+                    input(class="form-control" id="password" type="password" name="password" placeholder="Senha")
+                    label(for="password") Senha
+                    
+                button(class="w-100 btn btn-lg btn-primary" type="submit") Login
+            br
+            if error
+                div(class="alert alert-danger" role="alert") Usuário e Senha não encontrado!
+    script(src="/js/bootstrap.min.js")

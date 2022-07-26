@@ -1,44 +1,24 @@
 {
-  "name": "static-file-server",
+  "name": "static_server",
   "version": "1.0.0",
-  "description": "Serviço em Node.js para arquivos estáticos com login gerenciado pelo Serviço de Autenticação",
-  "main": "src/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/1cgeo/static_file_server"
-  },
-  "engines": {
-    "node": "~8.7.0",
-    "npm": ">=5.4.2"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
-    "config": "node create_config.js",
-    "build": "node create_build.js",
-    "create-docs": "node server/create_documentation.js",
-    "start": "pm2 start server/src/index.js",
-    "start-dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run start\""
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "Static Files",
-    "Node",
-    "Express"
-  ],
-  "author": "DSG/1CGEO <diniz.felipe@eb.mil.br>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/1cgeo/static_file_server/issues"
-  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.4",
-    "bluebird": "^3.7.2",
-    "colors": "^1.4.0",
-    "concurrently": "^6.2.1",
-    "inquirer": "^8.1.5",
-    "pg-promise": "^10.11.0",
-    "pgtools": "^0.3.2",
-    "fs-extra": "^10.0.0",
-    "npm-run": "^5.0.1",
-    "pm2": "^5.1.1"
+    "bootstrap": "^5.2.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.6",
+    "pug": "^3.0.2"
   }
 }
